@@ -4,7 +4,7 @@ import logo from "../../public/logo.png";
 
 const NavBar = () => {
     return (
-        <header className="bg-sky-100 bg-opacity-80 bg-blend-multiply sticky top-0 z-30 w-full">
+        <header className="bg-sky-200 bg-opacity-80 bg-blend-multiply sticky top-0 z-30 w-full">
             <div className="container mx-auto">
                 <div className="navbar">
                     <div className="navbar-start">

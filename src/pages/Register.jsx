@@ -1,12 +1,55 @@
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../authProviders/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
 
 const Register = () => {
+
+    const [error , setError] = useState(null);
+    const {createUser} = useContext(AuthContext);
+
+    const handleRegisterSubmit = (e) =>{
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const photo = form.photo.value;
+
+        console.log(name,email,password,photo);
+        createUser(email,password)
+        .then(res=> {
+            const createdUser = res.user;
+
+            updateProfile(createdUser, {
+                displayName: name,
+                photoURL: photo
+              }).then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!!',
+                    text: 'User SuccessFully created.',
+                  });
+              }).catch((err) => {
+                setError(err.message);
+                return;
+            });
+
+        })
+        .catch(er=> {
+            setError(er.message);
+            return;
+        });
+    }
+
+
     return (
         <div className="flex flex-col justify-center items-center my-14">
             <div className="card w-full max-w-sm shadow-2xl bg-white shadow-cyan-400/50">
-                <form className="card-body">
+                <form onSubmit={handleRegisterSubmit} className="card-body">
                     <h2 className="text-3xl font-bold text-center">Register</h2>
-                    <p className="text-center text-red-600"></p>
+                    <p className="text-center text-red-600">{error && error}</p>
                     <div className="">
                         <label className="label">
                             <span className="label-text">Name</span>

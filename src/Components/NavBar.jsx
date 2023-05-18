@@ -1,8 +1,34 @@
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import ActiveLink from "./ActiveLink";
 import logo from "../../public/logo.png";
+import { useContext } from "react";
+import { AuthContext } from "../authProviders/AuthProvider";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
+
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!!',
+                    text: 'Log Out Done',
+                });
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Action Not Performed',
+                    text: 'Something went wrong! Try Agauin',
+                });
+                return;
+            });
+    }
+
     return (
         <header className="bg-sky-200 bg-opacity-80 bg-blend-multiply sticky top-0 z-30 w-full">
             <div className="container mx-auto">
@@ -15,10 +41,20 @@ const NavBar = () => {
                             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100  rounded-box w-52 space-y-2">
                                 <li className="text-sm font-semibold"><ActiveLink to="/">Home</ActiveLink></li>
                                 <li className="text-sm font-semibold"><ActiveLink to="/allToys">All Toys</ActiveLink></li>
-                                <li className="text-sm font-semibold"><ActiveLink to="/myToys">My Toys</ActiveLink></li>
-                                <li className="text-sm font-semibold"><ActiveLink to="/addAToy"> Add A Toy</ActiveLink></li>
                                 <li className="text-sm font-semibold"><ActiveLink to="/blogs">Blogs</ActiveLink></li>
-                                <li className="text-sm font-semibold"><ActiveLink to="/login">Login</ActiveLink></li>
+                                {
+                                    user
+                                        ?
+                                        <>
+                                            <li className="text-sm font-semibold"><ActiveLink to="/addAToy"> Add A Toy</ActiveLink></li>
+                                            <li className="text-sm font-semibold"><ActiveLink to="/myToys">My Toys</ActiveLink></li>
+                                            <li onClick={handleLogout} className="text-sm font-semibold">
+                                                <button className="btn bg-red-500 btn-sm border-none text-white">Logout</button>
+                                            </li>
+                                        </>
+                                        :
+                                        <li className="text-sm font-semibold"><ActiveLink to="/login">Login</ActiveLink></li>
+                                }
                             </ul>
                         </div>
                         <div className="md:flex md:items-center">
@@ -35,12 +71,31 @@ const NavBar = () => {
                             <ul className="menu menu-horizontal px-1 space-x-2">
                                 <li className="text-sm font-semibold"><ActiveLink to="/">Home</ActiveLink></li>
                                 <li className="text-sm font-semibold"><ActiveLink to="/allToys">All Toys</ActiveLink></li>
-                                <li className="text-sm font-semibold"><ActiveLink to="/myToys">My Toys</ActiveLink></li>
-                                <li className="text-sm font-semibold"><ActiveLink to="/addAToy"> Add A Toy</ActiveLink></li>
                                 <li className="text-sm font-semibold"><ActiveLink to="/blogs">Blogs</ActiveLink></li>
-                                <li className="text-sm font-semibold"><ActiveLink to="/login">Login</ActiveLink></li>
+                                {
+                                    user
+                                        ?
+                                        <>
+                                            <li className="text-sm font-semibold"><ActiveLink to="/addAToy"> Add A Toy</ActiveLink></li>
+                                            <li className="text-sm font-semibold"><ActiveLink to="/myToys">My Toys</ActiveLink></li>
+                                            <li onClick={handleLogout} className="text-sm font-semibold">
+                                                <button className="btn bg-red-500 border-none text-white">Logout</button>
+                                            </li>
+                                        </>
+                                        :
+                                        <li className="text-sm font-semibold"><ActiveLink to="/login">Login</ActiveLink></li>
+                                }
                             </ul>
                         </div>
+
+                        {
+                            user &&
+                            <label className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img title={user?.displayName && user?.displayName} src={user.photoURL ? user.photoURL : "https://img.freepik.com/free-icon/user_318-563642.jpg"} />
+                                </div>
+                            </label>
+                        }
 
                     </div>
                 </div>

@@ -1,14 +1,69 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../authProviders/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
+
+    const [error , setError] = useState(null);
+    const { signInUser,  googleLogin } = useContext(AuthContext);
+
+    const handleLoginSubmit = (e)=>{
+        setError("");
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email,password);
+
+        signInUser(email,password)
+        .then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!!',
+                text: 'Successfully Loged In',
+            });
+
+            form.reset(); 
+
+          })
+        .catch((err) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Action Not Performed',
+                text: 'Something went wrong! Try Agauin',
+            });
+            return;
+        });
+
+    }
+
+    const handleGoogleLogin= () =>{
+        googleLogin()
+        .then((result) => {
+            const user = result.user;
+            console.log(user);
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!!',
+                text: 'Successfully Loged In',
+            });
+
+          }).catch((error) => {
+            setError(error.message);
+            return;
+          });
+    }
+
     return (
         <div className='mb-12'>
             <div className="flex justify-center mt-16">
                 <div className="card w-full max-w-sm shadow-2xl bg-white shadow-cyan-500/50">
-                    <form className="card-body">
+                    <form onSubmit={handleLoginSubmit} className="card-body">
                         <h2 className="text-3xl font-bold text-center">Login</h2>
-                        <p className="text-center text-red-600">  </p>
+                        <p className="text-center text-red-600"> {error && error} </p>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -31,7 +86,7 @@ const Login = () => {
                             OR
                         </p>
 
-                        <div className="w-full flex justify-between btn btn-ghost mb-2 bg-gray-100">
+                        <div onClick={handleGoogleLogin} className="w-full flex justify-between btn btn-ghost mb-2 bg-gray-100">
                             <img className="h-6 w-6" src="https://github.com/emon3455/demo-picture/blob/main/travel-images/google.png?raw=true" alt="" />
                             <span>Continue with Google</span>
                         </div>

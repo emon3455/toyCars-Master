@@ -10,6 +10,7 @@ const Register = () => {
     const {createUser} = useContext(AuthContext);
 
     const handleRegisterSubmit = (e) =>{
+        setError("");
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -31,6 +32,9 @@ const Register = () => {
                     title: 'Success!!',
                     text: 'User SuccessFully created.',
                   });
+
+                  form.reset();
+                  
               }).catch((err) => {
                 setError(err.message);
                 return;
@@ -81,14 +85,6 @@ const Register = () => {
                     <p className="text-center text-gray-600">
                         Already have an Account? <Link className="text-sky-600" to="/login">Login</Link>
                     </p>
-                    <p className="text-center font-bold">
-                        OR
-                    </p>
-
-                    <div className="w-full flex justify-between btn btn-ghost mb-2 bg-gray-100">
-                        <img className="h-6 w-6" src="https://github.com/emon3455/demo-picture/blob/main/travel-images/google.png?raw=true" alt="" />
-                        <span>Continue with Google</span>
-                    </div>
 
                 </form>
 

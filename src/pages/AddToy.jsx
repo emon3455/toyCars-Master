@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 
+import Swal from "sweetalert2";
+
 const AddToy = () => {
 
     const handleAddToy=(e)=>{
@@ -27,6 +29,27 @@ const AddToy = () => {
             description
         }
         console.log(toy);
+
+        fetch("http://localhost:5000/toys",{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(toy)
+        })
+        .then(res=> res.json())
+        .then(data=> {
+            if(data.insertedId){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!!',
+                    text: 'Toy SuccessFully Added',
+                });
+
+                form.reset();
+            }
+        })
+        .catch(er=> console.log(er))
 
     }
 

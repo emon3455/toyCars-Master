@@ -19,27 +19,42 @@ const AllToys = () => {
     return (
         <div className="my-10">
             <h2 className="text-4xl text-center font-extrabold my-12 text-violet-600">ToyCars Collections</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 p-2">
-                {
-                    toys.map(toy => {
-                return  (<div key={toy._id} className="card card-compact bg-base-100 shadow-2xl">
-                            <div className="card-body">
-                                <h2 className="card-title text-2xl">{toy.toyName}</h2>
-                                <div className="grid grid-cols-2 gap-4 text-md">
-                                    <p> <span className="font-bold">Seller: </span> {toy.sellerName}</p>
-                                    <p> <span className="font-bold">Catagory Name: </span> {toy.subCategory}</p>
-                                    <p>  <span className="font-bold">price: </span>${toy.price}K</p>
-                                    <p> <span className="font-bold">Available Quantity: </span> {toy.availableQuantity}</p>
-                                </div>
-                                <div className="card-actions justify-end">
-                                    <Link to={`/allToy/${toy._id}`}  className="btn btn-primary">
-                                        View Details
-                                    </Link >
-                                </div>
-                            </div>
-                        </div>);
-                    })
-                }
+            <div className="p-2">
+                <div className="overflow-x-auto">
+                    <table className="table table-zebra w-full">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Seller Name</th>
+                                <th>Toy Name</th>
+                                <th>Sub Catagory</th>
+                                <th>Price</th>
+                                <th>Available Quantity</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                toys.map((toy, indx) => {
+                                    return (<tr key={toy._id}>
+                                        <th>{indx + 1}</th>
+                                        <td>{toy.sellerName}</td>
+                                        <th>{toy.toyName}</th>
+                                        <th>{toy.subCategory}</th>
+                                        <th>${toy.price}K</th>
+                                        <th>{toy.availableQuantity}</th>
+                                        <th>
+                                            <Link to={`/allToy/${toy._id}`} className="btn btn-warning btn-sm">
+                                                View Details
+                                            </Link >
+                                        </th>
+                                    </tr>)
+                                })
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

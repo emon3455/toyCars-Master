@@ -19,13 +19,13 @@ const Login = () => {
         console.log(email,password);
 
         signInUser(email,password)
-        .then(() => {
+        .then((res) => {
             Swal.fire({
                 icon: 'success',
                 title: 'Success!!',
                 text: 'Successfully Loged In',
             });
-
+            console.log(res.user);
             form.reset(); 
 
           })

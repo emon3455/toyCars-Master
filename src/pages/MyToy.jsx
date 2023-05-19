@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../authProviders/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const MyToy = () => {
@@ -15,9 +17,56 @@ const MyToy = () => {
             .catch(er => console.log(er.message));
     }, [user])
 
+    const handleDeleteToy =(id)=>{
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/toys/${id}`,{
+                    method: "DELETE",
+                })
+                .then(res=> res.json())
+                .then(data=> {
+                    if(data.deletedCount ==1){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!!',
+                            text: 'Toy Deleted Successfully',
+                        });
+                        const remaining = toys.filter(ty=> ty._id !== id);
+                        setToys(remaining);
+                    }
+                    else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'error!!',
+                            text: 'Cannot Delete! Try Again',
+                        }); 
+                        return;
+                    }
+                })
+                .catch(er=>{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'error!!',
+                        text: 'Cannot Delete! Try Again',
+                    }); 
+                })
+            }
+        })
+        
+    }
+
+
     return (
         <div className="my-10">
-            <h2 className="text-3xl text-center font-extrabold my-12 text-violet-600">ToyCars Collections from: {user.displayName}</h2>
+            <h2 className="text-xl lg:text-3xl text-center font-extrabold my-8 text-violet-600">ToyCars Collections from: {user.displayName}({user.email})</h2>
             <div className="p-2">
                 <div className="overflow-x-auto">
                     <table className="table table-zebra w-full">
@@ -25,9 +74,7 @@ const MyToy = () => {
                         <thead>
                             <tr>
                                 <th></th>
-                                <th></th>
-                                <th>Seller Name</th>
-                                <th>Seller Email</th>
+                                <th>Delete</th>
                                 <th>Toy Name</th>
                                 <th>Toy image</th>
                                 <th>Sub Catagory</th>
@@ -46,12 +93,10 @@ const MyToy = () => {
                                             {indx + 1}
                                         </td>
                                         <td>
-                                            <Link to={`/allToy/${toy._id}`} className="btn btn-circle btn-sm btn-outline">
+                                            <button onClick={()=>handleDeleteToy(toy._id)} className="btn btn-circle btn-sm btn-outline">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                                            </Link>
+                                            </button>
                                         </td>
-                                        <td>{toy.sellerName}</td>
-                                        <td>{toy.sellerEmail}</td>
                                         <td>{toy.toyName}</td>
                                         <td>
                                             <div className="avatar">
@@ -70,7 +115,7 @@ const MyToy = () => {
                                                 Update
                                             </Link >
                                         </th>
-                                        <td>{toy.description && toy.description.slice(0,20)+"..."}</td>
+                                        <td>{toy?.description.length ? toy.description.slice(0,25)+"..." : toy?.description}</td>
                                     </tr>)
                                 })
                             }

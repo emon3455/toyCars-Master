@@ -22,7 +22,32 @@ const UpdateToy = () => {
             availableQuantity,
             description
         }
-        console.log(UpdatedToy);
+
+        fetch(`http://localhost:5000/toys/${toy._id}`,{
+            method: "PUT",
+            headers: {
+                "Content-Type": "Application/json",
+            },
+            body: JSON.stringify(UpdatedToy)
+        })
+        .then(res=> res.json())
+        .then(data=>{
+            if(data.modifiedCount>0){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!!',
+                    text: 'Toy SuccessFully Updated',
+                });
+                form.reset();
+            }
+        })
+        .catch(er=>{
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!!',
+                text: 'Cannot Update! Try again.',
+            });
+        })
 
     }
 
@@ -58,7 +83,7 @@ const UpdateToy = () => {
                         <label className="label">
                             <span className="label-text ">Description</span>
                         </label>
-                        <textarea placeholder="description" className="p-2 border-2 rounded-lg w-full h-32" name="description" id="description"></textarea>
+                        <textarea required placeholder="description" className="p-2 border-2 rounded-lg w-full h-32" name="description" id="description"></textarea>
                     </div>
 
                     <button type="submit" className="mt-2 btn btn-warning font-bold">Update</button>

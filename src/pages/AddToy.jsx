@@ -1,23 +1,28 @@
 /* eslint-disable no-unused-vars */
 
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../authProviders/AuthProvider";
 
 const AddToy = () => {
 
-    const handleAddToy=(e)=>{
+    const { user } = useContext(AuthContext);
+    const [catagory, setCatarory] = useState("Sports Cars");
+
+    const handleAddToy = (e) => {
         e.preventDefault();
         const form = e.target;
         const toyName = form.ToyName.value;
         const picture = form.photo.value;
         const sellerName = form.SellerName.value;
-        const sellerEmail =  form.sellerEmail.value;
-        const subCategory = form.SubCatagory.value;
+        const sellerEmail = form.sellerEmail.value;
+        const subCategory = catagory;
         const price = form.price.value;
         const rating = form.rating.value;
         const availableQuantity = form.availableQuantity.value;
-        const description  = form.description.value;
-        
-        const toy={
+        const description = form.description.value;
+
+        const toy = {
             toyName,
             picture,
             sellerName,
@@ -69,15 +74,21 @@ const AddToy = () => {
                         </div>
 
                         <div className="">
-                            <input required type="text" name="SellerName" placeholder="Seller Name" className="p-2 border-2 rounded-lg w-full" />
+                            <input required type="text" name="SellerName" placeholder="Seller Name" defaultValue={user && user?.displayName} className="p-2 border-2 rounded-lg w-full" readOnly />
                         </div>
 
                         <div className="">
-                            <input required type="email" name="sellerEmail" placeholder="Seller Email" className="p-2 border-2 rounded-lg w-full" />
+                            <input required type="email" name="sellerEmail" placeholder="Seller Email" defaultValue={user && user?.email} className="p-2 border-2 rounded-lg w-full" readOnly />
                         </div>
 
-                        <div className="">
-                            <input required type="text" name="SubCatagory" placeholder="Sub Catagory" className="p-2 border-2 rounded-lg w-full" />
+                        <div >
+                            <select onChange={(e)=> setCatarory(e.target.value)} className="p-2 border-2 rounded-lg w-full">
+                                <option selected value="Sports Cars">Sports Cars</option>
+                                <option value="Luxirious Vehicles">Luxirious Vehicles</option>
+                                <option value="Remote Control Cars">Remote Control Cars</option>
+                                <option value="Transport Vehicles">Transport Vehicles</option>
+                                <option value="Basic Vehicles">Basic Vehicles</option>
+                            </select>
                         </div>
 
                         <div className="">
@@ -91,7 +102,7 @@ const AddToy = () => {
                         <div className="">
                             <input required type="text" name="availableQuantity" placeholder="Available Quantity" className="p-2 border-2 rounded-lg w-full" />
                         </div>
-                        
+
                     </div>
 
                     <div className="">

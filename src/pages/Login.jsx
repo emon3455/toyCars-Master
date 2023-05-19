@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../authProviders/AuthProvider";
 import Swal from "sweetalert2";
 
@@ -9,6 +9,10 @@ const Login = () => {
 
     const [error , setError] = useState(null);
     const { signInUser,  googleLogin } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/"
 
     const handleLoginSubmit = (e)=>{
         setError("");
@@ -27,7 +31,7 @@ const Login = () => {
             });
             console.log(res.user);
             form.reset(); 
-
+            navigate(from, {replace:true});
           })
         .catch((err) => {
             Swal.fire({
@@ -50,7 +54,9 @@ const Login = () => {
                 title: 'Success!!',
                 text: 'Successfully Loged In',
             });
-
+            
+            navigate(from, {replace:true});
+            
           }).catch((error) => {
             setError(error.message);
             return;

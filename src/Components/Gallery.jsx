@@ -17,7 +17,7 @@ const Gallery = () => {
     return (
         <div className="my-10">
 
-            <h2 className="text-4xl text-center font-bold mb-10">Our Toys Gallery</h2>
+            <h2 className="text-4xl text-center font-extrabold text-violet-600 mb-10">Our Toys Gallery</h2>
 
             <Marquee >
 

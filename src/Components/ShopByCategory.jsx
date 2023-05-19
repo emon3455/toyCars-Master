@@ -74,7 +74,7 @@ const ShopByCategory = () => {
 
 
     return (
-        <div className="p-2">
+        <div className="p-2 bg-gray-100">
 
             <h2 className='text-center text-4xl font-extrabold text-violet-600 mt-20 mb-10'>Shop By Catagory</h2>
             

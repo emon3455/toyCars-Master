@@ -74,11 +74,11 @@ const AddToy = () => {
                         </div>
 
                         <div className="">
-                            <input required type="text" name="SellerName" placeholder="Seller Name" defaultValue={user && user?.displayName} className="p-2 border-2 rounded-lg w-full" readOnly />
+                            <input required type="text" name="SellerName" placeholder="Seller Name" defaultValue={user && user?.displayName} className="p-2 border-2 rounded-lg w-full" />
                         </div>
 
                         <div className="">
-                            <input required type="email" name="sellerEmail" placeholder="Seller Email" defaultValue={user && user?.email} className="p-2 border-2 rounded-lg w-full" readOnly />
+                            <input required type="email" name="sellerEmail" placeholder="Seller Email" defaultValue={user && user?.email} className="p-2 border-2 rounded-lg w-full" />
                         </div>
 
                         <div >
@@ -92,7 +92,7 @@ const AddToy = () => {
                         </div>
 
                         <div className="">
-                            <input required type="text" name="price" placeholder="Price" className="p-2 border-2 rounded-lg w-full" />
+                            <input required type="number" name="price" placeholder="Price" className="p-2 border-2 rounded-lg w-full" />
                         </div>
 
                         <div className="">
@@ -100,7 +100,7 @@ const AddToy = () => {
                         </div>
 
                         <div className="">
-                            <input required type="text" name="availableQuantity" placeholder="Available Quantity" className="p-2 border-2 rounded-lg w-full" />
+                            <input required type="number" name="availableQuantity" placeholder="Available Quantity" className="p-2 border-2 rounded-lg w-full" />
                         </div>
 
                     </div>

@@ -23,31 +23,38 @@ const UpdateToy = () => {
             description
         }
 
-        fetch(`http://localhost:5000/toys/${toy._id}`,{
+        fetch(`http://localhost:5000/toys/${toy._id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "Application/json",
             },
             body: JSON.stringify(UpdatedToy)
         })
-        .then(res=> res.json())
-        .then(data=>{
-            if(data.modifiedCount>0){
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!!',
+                        text: 'Toy SuccessFully Updated',
+                    });
+                    form.reset();
+                    form.reset(); // Reset the form fields
+
+                    // Reset specific fields to remove the default value
+                    form.price.value = "";
+                    form.rating.value = "";
+                    form.availableQuantity.value = "";
+                    form.description.value = "";
+                }
+            })
+            .catch(er => {
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Success!!',
-                    text: 'Toy SuccessFully Updated',
+                    icon: 'error',
+                    title: 'Error!!',
+                    text: 'Cannot Update! Try again.',
                 });
-                form.reset();
-            }
-        })
-        .catch(er=>{
-            Swal.fire({
-                icon: 'error',
-                title: 'Error!!',
-                text: 'Cannot Update! Try again.',
-            });
-        })
+            })
 
     }
 
@@ -62,19 +69,19 @@ const UpdateToy = () => {
                             <label className="label">
                                 <span className="label-text">Price</span>
                             </label>
-                            <input required type="text" name="price" placeholder="Price" className="p-2 border-2 rounded-lg w-full" />
+                            <input required type="text" defaultValue={toy.price} name="price" placeholder="Price" className="p-2 border-2 rounded-lg w-full" />
                         </div>
                         <div className="">
                             <label className="label">
                                 <span className="label-text">Rating</span>
                             </label>
-                            <input required type="text" name="rating" placeholder="Rating" className="p-2 border-2 rounded-lg w-full" />
+                            <input required type="text" defaultValue={toy.rating} name="rating" placeholder="Rating" className="p-2 border-2 rounded-lg w-full" />
                         </div>
                         <div className="">
                             <label className="label">
                                 <span className="label-text">Available Quantity</span>
                             </label>
-                            <input required type="text" name="availableQuantity" placeholder="Available Quantity" className="p-2 border-2 rounded-lg w-full" />
+                            <input required type="text" defaultValue={toy.availableQuantity} name="availableQuantity" placeholder="Available Quantity" className="p-2 border-2 rounded-lg w-full" />
                         </div>
 
                     </div>
@@ -83,7 +90,7 @@ const UpdateToy = () => {
                         <label className="label">
                             <span className="label-text ">Description</span>
                         </label>
-                        <textarea required placeholder="description" className="p-2 border-2 rounded-lg w-full h-32" name="description" id="description"></textarea>
+                        <textarea required placeholder="description" defaultValue={toy.description} className="p-2 border-2 rounded-lg w-full h-32" name="description" id="description"></textarea>
                     </div>
 
                     <button type="submit" className="mt-2 btn btn-warning font-bold">Update</button>

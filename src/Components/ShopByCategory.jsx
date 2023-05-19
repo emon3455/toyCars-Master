@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // import { useState } from 'react';
 // import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 // import 'react-tabs/style/react-tabs.css';
@@ -39,31 +40,72 @@
 
 // export default ShopByCategory;
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import Car from './Car';
 
 const ShopByCategory = () => {
+
     const [tabIndex, setTabIndex] = useState(0);
+    const [toys, setToys] = useState([]);
+    const [sportsCar, setSportsCar] = useState([]);
+    const [luxirousCars, setLuxirousCars] = useState([]);
+    const [remoteControlCars, setRemoteControlCars] = useState([]);
+
+    useEffect(()=>{
+        fetch("http://localhost:5000/toys")
+        .then(res=> res.json())
+        .then(data=> setToys(data))
+        .catch(er=> console.log(er.message))
+    },[])
+
+    useEffect(()=>{
+        const supCars = toys.filter(ty=> ty.subCategory === "Sports Cars");
+        setSportsCar(supCars);
+        const luxCars = toys.filter(ty=> ty.subCategory === "Luxirious Vehicles");
+        setLuxirousCars(luxCars);
+
+        const remoteCars = toys.filter(ty=> ty.subCategory === "Remote Control Cars");
+        setRemoteControlCars(remoteCars);
+
+    },[toys])
+
+
+
     return (
         <div className="p-2">
 
-            <h2 className='text-center text-4xl font-extrabold text-violet-600'>Shop By Catagory</h2>
+            <h2 className='text-center text-4xl font-extrabold text-violet-600 mt-20 mb-10'>Shop By Catagory</h2>
             
             <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-                <TabList>
-                    <Tab>Luxirious Vehicles</Tab>
-                    <Tab>Sports Cars</Tab>
-                    <Tab>Remote Control Cars</Tab>
+
+                <TabList className={` mt-5 px-2 `}>
+                    <Tab> <button className='btn btn-active btn-ghost'>Luxirious Vehicles</button> </Tab>
+                    <Tab> <button className='btn btn-warning'>Sports Cars</button> </Tab>
+                    <Tab> <button className='btn btn-success'>Remote Control Cars</button> </Tab>
                 </TabList>
+
                 <TabPanel>
-                    1
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-4">
+                        {
+                            luxirousCars.map(car=> <Car key={car._id} car={car}></Car>)
+                        }
+                    </div>
                 </TabPanel>
                 <TabPanel>
-                    2
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-4">
+                        {
+                            sportsCar.map(car=> <Car key={car._id} car={car}></Car>)
+                        }
+                    </div>
                 </TabPanel>
                 <TabPanel>
-                    3
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-4">
+                        {
+                            remoteControlCars.map(car=> <Car key={car._id} car={car}></Car>)
+                        }
+                    </div>
                 </TabPanel>
             </Tabs>
         </div>

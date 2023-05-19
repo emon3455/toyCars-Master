@@ -8,7 +8,7 @@ const SingleToy = () => {
     return (
         <div className="flex justify-center my-5">
             <div key={toy._id} className="card card-compact max-w-lg bg-base-100 shadow-xl">
-                <figure><img className="w-full" src={toy.picture} alt="Shoes" /></figure>
+                <figure><img className="w-full" src={toy.picture} alt="Toy Car" /></figure>
                 <div className="card-body">
                     <h2 className="card-title text-2xl">{toy.toyName}</h2>
                     <div className="grid grid-cols-2 gap-4 text-md">

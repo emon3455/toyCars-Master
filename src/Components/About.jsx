@@ -14,9 +14,12 @@ const About = () => {
                 <div className="order-2 md:order-1">
 
                     <h2 className="text-4xl font-bold my-7">ToyCars Master</h2>
-                    <p className="font-medium text-gray-700">
+                    <p className="font-medium text-gray-700 mb-5">
                     At our toy cars website, we are passionate about bringing joy and excitement to kids and collectors alike. With a wide selection of high-quality toy cars, we strive to fuel imaginations and create unforgettable play experiences. Our dedication to customer satisfaction and attention to detail sets us apart. Join us on this thrilling journey!
                     </p>
+                    <ActiveLink to="/allToys">
+                        <button className="btn btn-warning font-bold">View All Toys</button>
+                    </ActiveLink>
 
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 order-1 md:order-2">
@@ -26,13 +29,6 @@ const About = () => {
                     <img className="card   image-full" src={car4} />
                 </div>
             </div>
-
-            <div className="text-center my-8">
-                <ActiveLink to="/allToys">
-                    <button className="btn btn-warning font-bold">View All Toys</button>
-                </ActiveLink>
-            </div>
-
         </div>
     );
 };

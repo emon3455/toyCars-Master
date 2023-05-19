@@ -54,7 +54,13 @@ const AddToy = () => {
                 form.reset();
             }
         })
-        .catch(er=> console.log(er))
+        .catch(er=> {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!!',
+                text: 'Something Went Wrong! Try Again',
+            });
+        })
 
     }
 

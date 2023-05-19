@@ -81,13 +81,13 @@ const ShopByCategory = () => {
             <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
 
                 <TabList className={` mt-5 px-2 `}>
-                    <Tab> <button className='btn btn-active btn-ghost'>Luxirious Vehicles</button> </Tab>
-                    <Tab> <button className='btn btn-warning'>Sports Cars</button> </Tab>
-                    <Tab> <button className='btn btn-success'>Remote Control Cars</button> </Tab>
+                    <Tab> <button className='btn btn-active btn-ghost btn-sm'>Luxirious Vehicles</button> </Tab>
+                    <Tab> <button className='btn btn-warning btn-sm'>Sports Cars</button> </Tab>
+                    <Tab> <button className='btn btn-success btn-sm'>Remote Control Cars</button> </Tab>
                 </TabList>
 
                 <TabPanel>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-4">
                         {
                             luxirousCars.map(car=> <Car key={car._id} car={car}></Car>)
                         }

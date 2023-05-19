@@ -11,7 +11,7 @@ const MyToy = () => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/toys?email=${user?.email}`)
+        fetch(`http://localhost:5000/specificToys?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setToys(data))
             .catch(er => console.log(er.message));

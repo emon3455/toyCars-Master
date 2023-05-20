@@ -40,7 +40,7 @@ const NavBar = () => {
                             </label>
                             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100  rounded-box w-52 space-y-2">
                                 <li className="text-sm font-semibold"><ActiveLink to="/">Home</ActiveLink></li>
-                                <li className="text-sm font-semibold"><ActiveLink to="/allToys">All Toys</ActiveLink></li>
+                                <li className="text-sm font-semibold"><ActiveLink to="/allToys">All Toys</ActiveLink></li> 
                                 <li className="text-sm font-semibold"><ActiveLink to="/blogs">Blogs</ActiveLink></li>
                                 {
                                     user
@@ -85,6 +85,7 @@ const NavBar = () => {
                                         :
                                         <li className="text-sm font-semibold"><ActiveLink to="/login">Login</ActiveLink></li>
                                 }
+                                
                             </ul>
                         </div>
 

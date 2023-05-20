@@ -1,10 +1,11 @@
 import { useLoaderData } from "react-router-dom";
 import { useTitle } from "../hooks/useTitle";
+import Rating from 'react-rating';
+import { FaStar , FaRegStar} from "react-icons/fa";
 
 const SingleToy = () => {
 
     const toy = useLoaderData();
-    console.log(toy);
     useTitle("Single Toy");
 
     return (
@@ -18,7 +19,20 @@ const SingleToy = () => {
                         <p> <span className="font-bold">Seller-Email: </span> {toy.sellerEmail}</p>                      
                         <p> <span className="font-bold">Available Quantity: </span> {toy.availableQuantity}</p>
                         <p>  <span className="font-bold">price: </span>${toy.price}K</p>
-                        <p>  <span className="font-bold">Rating: </span>{toy.rating}</p>
+                        <p className="space-x-2">
+                    <span className="font-bold">Rating: </span>
+                    <span>
+                        <Rating
+                            placeholderRating={toy.rating}
+                            readonly
+                            emptySymbol={<FaRegStar></FaRegStar>}
+                            placeholderSymbol={<FaStar className='text-warning'></FaStar>}
+                            fullSymbol={<FaStar></FaStar>}
+                        />
+                        
+                    </span>
+                    <span>{toy.rating}</span>
+                </p>
                     </div>
                     
                     <p className="text-gray-600"><span className="font-bold">Description: </span>{toy.description}</p>

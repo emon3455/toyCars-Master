@@ -49,8 +49,6 @@ const AllToys = () => {
     }, []);
 
 
-    console.log(toys);
-
     return (
         <div className="my-10">
             <h2 className="text-4xl text-center font-extrabold my-12 text-violet-600">ToyCars Collections</h2>
@@ -91,7 +89,7 @@ const AllToys = () => {
                                         ?
                                         <tbody>
                                             {
-                                                toys.slice(0, 20).map((toy, indx) => {
+                                                toys.map((toy, indx) => {
                                                     return (<tr key={toy._id}>
                                                         <td>{indx + 1}</td>
                                                         <td>{toy.sellerName}</td>

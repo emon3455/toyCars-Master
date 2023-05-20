@@ -71,7 +71,7 @@ const Login = () => {
             <div className="flex justify-center mt-16">
                 <div className="card w-full max-w-sm shadow-2xl bg-white shadow-cyan-500/50">
                     <form onSubmit={handleLoginSubmit} className="card-body">
-                        <h2 className="text-3xl font-bold text-center">Login</h2>
+                        <h2 className="text-3xl font-extrabold text-center text-violet-700">Login</h2>
                         <p className="text-center text-red-600"> {error && error} </p>
                         <div className="form-control">
                             <label className="label">

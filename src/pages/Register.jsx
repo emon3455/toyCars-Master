@@ -54,7 +54,7 @@ const Register = () => {
         <div className="flex flex-col justify-center items-center my-14">
             <div className="card w-full max-w-sm shadow-2xl bg-white shadow-cyan-400/50">
                 <form onSubmit={handleRegisterSubmit} className="card-body">
-                    <h2 className="text-3xl font-bold text-center">Register</h2>
+                    <h2 className="text-3xl font-extrabold text-center text-violet-700">Register</h2>
                     <p className="text-center text-red-600">{error && error}</p>
                     <div className="">
                         <label className="label">

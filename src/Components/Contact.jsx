@@ -24,7 +24,7 @@ const Contact = () => {
             <h4 className="text-4xl font-extrabold text-violet-500 text-center my-5">Contact US</h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 mt-0 gap-5">
-                <div className="w-full max-w-lg mx-auto shadow-2xl rounded-2xl bg-base-100 order-2 md:order-1">
+                <div className="w-full max-w-lg mx-auto shadow-2xl rounded-2xl bg-base-100 order-2 md:order-1" data-aos="zoom-in-right" data-aos-easing="linear" data-aos-duration="1500">
                     <form onSubmit={handleSend} className="card-body">
                         <h2 className="text-3xl text-center font-bold">Send Message</h2>
                         <div className="form-control">
@@ -46,7 +46,7 @@ const Contact = () => {
                     </form>
                 </div>
 
-                <div className="w-2/3 mx-auto order-1">
+                <div className="w-2/3 mx-auto order-1" data-aos="flip-down" data-aos-easing="linear" data-aos-duration="1500">
                     <img className="w-full" src={contact} alt="" />
                 </div>
             </div>

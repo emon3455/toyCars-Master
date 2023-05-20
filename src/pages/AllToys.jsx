@@ -8,24 +8,27 @@ import { useTitle } from "../hooks/useTitle";
 const AllToys = () => {
 
     const [toys, setToys] = useState([]);
+    const [load, setLoad] = useState(false);
     useTitle("All Toys");
-    
+
     const handleSearch = (e) => {
         e.preventDefault();
         const form = e.target;
         const txt = form.search.value;
 
+        setLoad(true);
         fetch(`https://car-master-toys-server.vercel.app/toySearch/${txt}`)
             .then(res => res.json())
             .then(data => {
-                if(data.length==0){
+                if (data.length == 0) {
                     Swal.fire({
                         icon: 'error',
                         title: 'No Matched!!',
                         text: 'Sorry No Data Found!... Try Again',
                     });
                 }
-                setToys(data)
+                setToys(data);
+                setLoad(false);
             })
             .catch(er => {
                 Swal.fire({
@@ -33,7 +36,7 @@ const AllToys = () => {
                     title: 'Error!!',
                     text: 'Something Went Wrong! Try Again',
                 });
-        })
+            })
         form.reset();
 
     }
@@ -45,7 +48,7 @@ const AllToys = () => {
             .catch(er => console.log(er.message));
     }, []);
 
-    
+
     console.log(toys);
 
     return (
@@ -61,53 +64,62 @@ const AllToys = () => {
                 </form>
             </div>
 
-            <div className="p-2">
-                <div className="overflow-x-auto">
-                    <table className="table table-zebra w-full">
-                        {/* head */}
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Seller Name</th>
-                                <th>Toy Name</th>
-                                <th>Sub Catagory</th>
-                                <th>Price</th>
-                                <th>Available Quantity</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        {
-                            toys
-                                ?
-                                <tbody>
-                                    {
-                                        toys.slice(0, 20).map((toy, indx) => {
-                                            return (<tr key={toy._id}>
-                                                <td>{indx + 1}</td>
-                                                <td>{toy.sellerName}</td>
-                                                <td>{toy.toyName}</td>
-                                                <td>{toy.subCategory}</td>
-                                                <td>${toy.price}K</td>
-                                                <td>{toy.availableQuantity}</td>
-                                                <th>
-                                                    <Link to={`/allToy/${toy._id}`} className="btn btn-warning btn-sm">
-                                                        View Details
-                                                    </Link >
-                                                </th>
-                                            </tr>)
-                                        })
-                                    }
-                                </tbody>
-                                :
-                                <div className="w-1/3 mx-auto my-10">
-                                    <progress className="progress w-56"></progress>
-                                </div>
+            {
+                load
+                    ?
+                    <div className="w-1/3 mx-auto my-10">
+                        <progress className="progress w-56"></progress>
+                    </div>
+                    :
+                    <div className="p-2">
+                        <div className="overflow-x-auto">
+                            <table className="table table-zebra w-full">
+                                {/* head */}
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Seller Name</th>
+                                        <th>Toy Name</th>
+                                        <th>Sub Catagory</th>
+                                        <th>Price</th>
+                                        <th>Available Quantity</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                {
+                                    toys
+                                        ?
+                                        <tbody>
+                                            {
+                                                toys.slice(0, 20).map((toy, indx) => {
+                                                    return (<tr key={toy._id}>
+                                                        <td>{indx + 1}</td>
+                                                        <td>{toy.sellerName}</td>
+                                                        <td>{toy.toyName}</td>
+                                                        <td>{toy.subCategory}</td>
+                                                        <td>${toy.price}K</td>
+                                                        <td>{toy.availableQuantity}</td>
+                                                        <th>
+                                                            <Link to={`/allToy/${toy._id}`} className="btn btn-warning btn-sm">
+                                                                View Details
+                                                            </Link >
+                                                        </th>
+                                                    </tr>)
+                                                })
+                                            }
+                                        </tbody>
+                                        :
+                                        <div className="w-1/3 mx-auto my-10">
+                                            <progress className="progress w-56"></progress>
+                                        </div>
+                                }
+                            </table>
 
-                        }
-                    </table>
+                        </div>
+                    </div>
+            }
 
-                </div>
-            </div>
+
         </div>
     );
 };

@@ -1,6 +1,4 @@
 /* eslint-disable no-unused-vars */
-
-import Lottie from "lottie-react";
 import contact from "../../public/contact.jpg";
 import Swal from "sweetalert2";
 

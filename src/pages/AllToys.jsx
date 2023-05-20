@@ -2,19 +2,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useTitle } from "../hooks/useTitle";
 
 
 const AllToys = () => {
 
     const [toys, setToys] = useState([]);
-
+    useTitle("All Toys");
     
     const handleSearch = (e) => {
         e.preventDefault();
         const form = e.target;
         const txt = form.search.value;
 
-        fetch(`http://localhost:5000/toySearch/${txt}`)
+        fetch(`https://car-master-toys-server.vercel.app/toySearch/${txt}`)
             .then(res => res.json())
             .then(data => {
                 if(data.length==0){
@@ -38,7 +39,7 @@ const AllToys = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/toys`)
+        fetch(`https://car-master-toys-server.vercel.app/toys`)
             .then(res => res.json())
             .then(data => setToys(data))
             .catch(er => console.log(er.message));

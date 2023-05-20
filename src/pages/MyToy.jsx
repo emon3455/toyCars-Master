@@ -3,19 +3,23 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../authProviders/AuthProvider";
 import Swal from "sweetalert2";
+import { useTitle } from "../hooks/useTitle";
 
 
 const MyToy = () => {
 
+    useTitle("My Toy");
+
     const [toys, setToys] = useState([]);
+    const [sort, setSort] = useState("asc");
     const { user } = useContext(AuthContext);
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/specificToys?email=${user?.email}`)
+    useEffect(()=>{
+        fetch(`https://car-master-toys-server.vercel.app/specificToys?email=${user?.email}&sort=${sort}`)
             .then(res => res.json())
             .then(data => setToys(data))
             .catch(er => console.log(er.message));
-    }, [user])
+    },[user,sort]);
 
     const handleDeleteToy =(id)=>{
         Swal.fire({
@@ -28,7 +32,7 @@ const MyToy = () => {
             confirmButtonText: 'Yes, delete it!'
           }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/toys/${id}`,{
+                fetch(`https://car-master-toys-server.vercel.app/toys/${id}`,{
                     method: "DELETE",
                 })
                 .then(res=> res.json())
@@ -67,6 +71,10 @@ const MyToy = () => {
     return (
         <div className="my-10">
             <h2 className="text-xl lg:text-3xl text-center font-extrabold my-8 text-violet-600">ToyCars Collections from: {user.displayName}({user.email})</h2>
+            <div className="p-2 space-x-2 space-y-2 text-right">
+                <button onClick={()=> setSort("asc")} className="btn btn-sm font-semibold">Sort By Price- Ascending</button>
+                <button onClick={()=> setSort("desc")} className="btn btn-success btn-sm font-semibold">Sort By Price- Descending</button>
+            </div>
             <div className="p-2">
                 <div className="overflow-x-auto">
                     <table className="table table-zebra w-full">

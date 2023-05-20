@@ -1,8 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import question from "../../public/questions.jpg";
+import { useTitle } from "../hooks/useTitle";
 
 const Blogs = () => {
+
+    useTitle("Blogs");
+
     return (
         <div className="my-10">
 

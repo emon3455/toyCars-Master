@@ -3,9 +3,10 @@
 import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../authProviders/AuthProvider";
+import { useTitle } from "../hooks/useTitle";
 
 const AddToy = () => {
-
+    useTitle("Add Toy");
     const { user } = useContext(AuthContext);
     const [catagory, setCatarory] = useState("Sports Cars");
 
@@ -17,7 +18,7 @@ const AddToy = () => {
         const sellerName = form.SellerName.value;
         const sellerEmail = form.sellerEmail.value;
         const subCategory = catagory;
-        const price = form.price.value;
+        const price = parseInt(form.price.value);
         const rating = form.rating.value;
         const availableQuantity = form.availableQuantity.value;
         const description = form.description.value;
@@ -35,7 +36,7 @@ const AddToy = () => {
         }
         console.log(toy);
 
-        fetch("http://localhost:5000/toys",{
+        fetch("https://car-master-toys-server.vercel.app/toys",{
             method: "POST",
             headers:{
                 "Content-Type": "application/json",

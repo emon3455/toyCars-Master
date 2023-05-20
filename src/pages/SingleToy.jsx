@@ -1,9 +1,11 @@
 import { useLoaderData } from "react-router-dom";
+import { useTitle } from "../hooks/useTitle";
 
 const SingleToy = () => {
 
     const toy = useLoaderData();
     console.log(toy);
+    useTitle("Single Toy");
 
     return (
         <div className="flex justify-center my-5">

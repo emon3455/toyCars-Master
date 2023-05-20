@@ -2,10 +2,12 @@
 
 import Swal from "sweetalert2";
 import { useLoaderData } from "react-router-dom";
+import { useTitle } from "../hooks/useTitle";
 
 
 const UpdateToy = () => {
 
+    useTitle("Update Toy");
     const toy = useLoaderData();
 
     const handleUpdateToy = (e) => {
@@ -23,7 +25,7 @@ const UpdateToy = () => {
             description
         }
 
-        fetch(`http://localhost:5000/toys/${toy._id}`, {
+        fetch(`https://car-master-toys-server.vercel.app/toys/${toy._id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "Application/json",

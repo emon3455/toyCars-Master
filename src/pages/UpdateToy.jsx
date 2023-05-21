@@ -13,7 +13,7 @@ const UpdateToy = () => {
     const handleUpdateToy = (e) => {
         e.preventDefault();
         const form = e.target;
-        const price = form.price.value;
+        const price = parseInt(form.price.value);
         const rating = form.rating.value;
         const availableQuantity = form.availableQuantity.value;
         const description = form.description.value;

@@ -70,7 +70,7 @@ const MyToy = () => {
 
     return (
         <div className="my-10">
-            <h2 className="text-xl lg:text-3xl text-center font-extrabold my-8 text-violet-600">ToyCars Collections from: {user.displayName}({user.email})</h2>
+            <h2 className="text-xl lg:text-3xl text-center font-extrabold my-8 text-violet-600">ToyCars Collections from: {user?.displayName}({user?.email})</h2>
             <div className="p-2 space-x-2 space-y-2 text-right">
                 <button onClick={()=> setSort("asc")} className="btn btn-sm font-semibold">Sort By Price- Ascending</button>
                 <button onClick={()=> setSort("desc")} className="btn btn-success btn-sm font-semibold">Sort By Price- Descending</button>

@@ -51,7 +51,6 @@ const Login = () => {
         googleLogin()
         .then((result) => {
             const user = result.user;
-            console.log(user);
             Swal.fire({
                 icon: 'success',
                 title: 'Success!!',

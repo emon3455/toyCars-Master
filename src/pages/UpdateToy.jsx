@@ -18,6 +18,17 @@ const UpdateToy = () => {
         const availableQuantity = form.availableQuantity.value;
         const description = form.description.value;
 
+        if(price==toy.price && rating==toy.rating && availableQuantity == toy.availableQuantity && description == toy.description){
+            Swal.fire({
+                icon: 'error',
+                title: 'Nothing To update!!',
+                text: 'Cannot Update! Please update atleast one field',
+            });
+            
+            return;
+
+        }
+
         const UpdatedToy = {
             price,
             rating,
@@ -41,7 +52,6 @@ const UpdateToy = () => {
                         text: 'Toy SuccessFully Updated',
                     });
                     form.reset();
-                    form.reset(); // Reset the form fields
 
                     // Reset specific fields to remove the default value
                     form.price.value = "";

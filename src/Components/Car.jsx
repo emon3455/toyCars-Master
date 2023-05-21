@@ -27,11 +27,10 @@ const Car = ({ car }) => {
                     </span>
                     <span>{car.rating}</span>
                 </p>
-                <button className="btn btn-info btn-sm">
-                    <Link to={`/allToy/${car._id}`} >
-                        View Details
-                    </Link >
-                </button>
+                
+                <Link to={`/allToy/${car._id}`}  className="btn btn-info btn-sm">
+                     View Details
+                </Link >
 
             </div>
         </div>

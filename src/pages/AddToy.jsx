@@ -90,7 +90,7 @@ const AddToy = () => {
 
                         <div >
                             <select onChange={(e)=> setCatarory(e.target.value)} className="p-2 border-2 rounded-lg w-full">
-                                <option selected value="Sports Cars">Sports Cars</option>
+                                <option value="Sports Cars">Sports Cars</option>
                                 <option value="Luxirious Vehicles">Luxirious Vehicles</option>
                                 <option value="Remote Control Cars">Remote Control Cars</option>
                                 <option value="Transport Vehicles">Transport Vehicles</option>

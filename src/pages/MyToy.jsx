@@ -15,7 +15,7 @@ const MyToy = () => {
     const { user } = useContext(AuthContext);
 
     useEffect(()=>{
-        fetch(`https://car-master-toys-server.vercel.app/specificToys?email=${user?.email}&sort=${sort}`)
+        fetch(`https://toycars-master-server.onrender.com/specificToys?email=${user?.email}&sort=${sort}`)
             .then(res => res.json())
             .then(data => setToys(data))
             .catch(er => console.log(er.message));
@@ -32,7 +32,7 @@ const MyToy = () => {
             confirmButtonText: 'Yes, delete it!'
           }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://car-master-toys-server.vercel.app/toys/${id}`,{
+                fetch(`https://toycars-master-server.onrender.com/toys/${id}`,{
                     method: "DELETE",
                 })
                 .then(res=> res.json())

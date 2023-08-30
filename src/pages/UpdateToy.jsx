@@ -36,7 +36,7 @@ const UpdateToy = () => {
             description
         }
 
-        fetch(`https://car-master-toys-server.vercel.app/toys/${toy._id}`, {
+        fetch(`https://toycars-master-server.onrender.com/toys/${toy._id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "Application/json",

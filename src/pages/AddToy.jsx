@@ -36,7 +36,7 @@ const AddToy = () => {
         }
         console.log(toy);
 
-        fetch("https://car-master-toys-server.vercel.app/toys",{
+        fetch("https://toycars-master-server.onrender.com/toys",{
             method: "POST",
             headers:{
                 "Content-Type": "application/json",

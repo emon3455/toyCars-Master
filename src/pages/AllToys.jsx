@@ -17,7 +17,7 @@ const AllToys = () => {
         const txt = form.search.value;
 
         setLoad(true);
-        fetch(`https://car-master-toys-server.vercel.app/toySearch/${txt}`)
+        fetch(`https://toycars-master-server.onrender.com/toySearch/${txt}`)
             .then(res => res.json())
             .then(data => {
                 if (data.length == 0) {
@@ -42,7 +42,7 @@ const AllToys = () => {
     }
 
     useEffect(() => {
-        fetch(`https://car-master-toys-server.vercel.app/toys`)
+        fetch(`https://toycars-master-server.onrender.com/toys`)
             .then(res => res.json())
             .then(data => setToys(data))
             .catch(er => console.log(er.message));

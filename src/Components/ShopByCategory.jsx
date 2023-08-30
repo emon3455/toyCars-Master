@@ -54,7 +54,7 @@ const ShopByCategory = () => {
     const [remoteControlCars, setRemoteControlCars] = useState([]);
 
     useEffect(()=>{
-        fetch("https://car-master-toys-server.vercel.app/toys")
+        fetch("https://toycars-master-server.onrender.com/toys")
         .then(res=> res.json())
         .then(data=> setToys(data))
         .catch(er=> console.log(er.message))

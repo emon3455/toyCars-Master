@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         {
             path: "/allToy/:id",
             element: <PrivateRoute><SingleToy></SingleToy></PrivateRoute>,
-            loader: ({params})=> fetch(`https://car-master-toys-server.vercel.app/toys/${params.id}`)
+            loader: ({params})=> fetch(`https://toycars-master-server.onrender.com/toys/${params.id}`)
         },
         {
             path: "/myToys",
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         {
             path: "/updateToy/:id",
             element: <PrivateRoute> <UpdateToy></UpdateToy> </PrivateRoute>,
-            loader: ({params})=> fetch(`https://car-master-toys-server.vercel.app/toys/${params.id}`)
+            loader: ({params})=> fetch(`https://toycars-master-server.onrender.com/toys/${params.id}`)
         },
         {
             path: "/addAToy",
